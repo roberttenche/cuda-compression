@@ -113,7 +113,10 @@ def make():
 
 def appl_run():
     info("Running application...")
-    system_run("bin/appl")
+    if isfile("bin/appl"):
+        system_run("bin/appl")
+    else:
+        error("Build application first!")
 
 
 def main():
