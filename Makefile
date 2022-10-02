@@ -41,7 +41,7 @@ default: appl
 
 # Application
 appl: setup device_target host_target
-	nvcc -L $(appl_lib_include) -l device $(appl_sources) -o $(appl_output)
+	nvcc -L $(appl_lib_include) -l:device.lib $(appl_sources) -o $(appl_output)
 
 # Device
 device_target: $(device_sources) $(device_include)/device.cuh huffman_target lempel_ziv_welch_target

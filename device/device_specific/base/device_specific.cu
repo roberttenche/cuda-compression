@@ -3,10 +3,14 @@
 #include "huffman.cuh"
 #include "lempel_ziv_welch.cuh"
 
+#include <stdio.h>
+
 uint16 device_cuda_cores = 512u;
 
 void huffman_device_specific_compress(void* input, void* output)
 {
+
+  printf("huffman_device_specific_compress\n");
   //
   // Insert math here
   //
