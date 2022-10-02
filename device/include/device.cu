@@ -13,7 +13,6 @@ extern void lzw_device_specific_decompress(void* input, void* output);
 
 void Huffman::compress(void* input, void* output)
 {
-  printf("Huffman::compress\n");
   huffman_device_specific_compress(input, output);
 }
 
