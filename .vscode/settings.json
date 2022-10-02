@@ -1,5 +1,5 @@
 {
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-    "cmake.configureOnOpen": false,
+    "C_Cpp.errorSquiggles": "Disabled",
 }

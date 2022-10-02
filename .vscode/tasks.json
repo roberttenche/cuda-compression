@@ -9,7 +9,8 @@
       "type": "shell",
       "command": "python",
       "args": [
-        "scripts/clean_build.py"
+        "scripts/build.py",
+        "-c"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -17,25 +18,14 @@
       "group": "build",
       "detail": "Removes the build folder entirely",
     },
-    { // MoveToBin
-      "label": "MoveToBin",
-      "type": "process",
-      "command": "python",
-      "args": [
-        "scripts/move_app_to_bin.py"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "detail": "Moves project files from build to bin",
-    },
     { // Build
       "label": "Build",
       "type": "shell",
       "dependsOrder": "sequence",
-      "dependsOn": [
-        "Build-Host",
-        "MoveToBin"
+      "command": "python",
+      "args": [
+        "scripts/build.py",
+        "-m"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -46,10 +36,13 @@
     { // Run
       "label": "Run",
       "type": "shell",
-      "command": "./host",
-      "args": [],
+      "command": "python",
+      "args": [
+        "scripts/build.py",
+        "-r"
+      ],
       "options": {
-        "cwd": "${workspaceFolder}/bin"
+        "cwd": "${workspaceFolder}"
       },
       "group": "build",
       "detail": "Build project first!"
@@ -61,107 +54,6 @@
       "dependsOn": [
         "Build",
         "Run"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": "build",
-      "detail": ""
-    },
-
-    // Host
-    { // GenerateMakeFile-Host
-      "label": "GenerateMakefile-Host",
-      "type": "process",
-      "command": "cmake",
-      "args": [
-        "-S",
-        "./host",
-        "-B",
-        "build/host/",
-        "-G",
-        "Ninja",
-        "-D",
-        "CMAKE_CXX_COMPILER=clang++"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "detail": "",
-    },
-    { // RunNinja-Host
-      "label": "RunNinja-Host",
-      "type": "process",
-      "command": "ninja",
-      "args": [],
-      "options": {
-        "cwd": "${workspaceFolder}/build/host"
-      },
-      "detail": "",
-    },
-    { // RunNinja-Host
-      "label": "RunNinja-Host",
-      "type": "process",
-      "command": "ninja",
-      "args": [],
-      "options": {
-        "cwd": "${workspaceFolder}/build/host"
-      },
-      "detail": "",
-    },
-    { // Build-Host
-      "label": "Build-Host",
-      "type": "shell",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "GenerateMakefile-Host",
-        "RunNinja-Host"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "detail": ""
-    },
-
-    // Device
-    { // GenerateMakeFile-Device
-      "label": "GenerateMakefile-Device",
-      "type": "process",
-      "command": "cmake",
-      "args": [
-        "-S",
-        "./device",
-        "-B",
-        "build/device/",
-        "-G",
-        "Ninja",
-        "-D",
-        "CMAKE_C_COMPILER=cl.exe",
-        "-D",
-        "CMAKE_CXX_COMPILER=cl.exe",
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "detail": "",
-    },
-    { // RunNinja-Device
-      "label": "RunNinja-Device",
-      "type": "process",
-      "command": "ninja",
-      "args": [],
-      "options": {
-        "cwd": "${workspaceFolder}/build/device"
-      },
-      "detail": "",
-    },
-    { // Build-Device
-      "label": "Build-Device",
-      "type": "shell",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "GenerateMakefile-Device",
-        "RunNinja-Device"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
