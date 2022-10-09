@@ -1,16 +1,12 @@
 #include "Common.cuh"
 #include <device.cuh>
 
-#include <stdio.h>
+#include <string>
 
 int main(int argc, char* argv[])
 {
-  uint32 a;
-  uint32 b;
+  std::string file_input = "test.txt";
 
-  Huffman::compress(&a, &b);
-  Huffman::decompress(&a, &b);
-  Lempel_Ziv_Welch::compress(&a, &b);
-  Lempel_Ziv_Welch::decompress(&a, &b);
+  Huffman::compress(file_input, Memory_Block_Size::MEMORY_BLOCK_32MB);
 
 }

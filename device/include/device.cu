@@ -5,28 +5,32 @@
 ///
 
 #include "stdio.h"
+#include "device_specific.cuh"
 
-extern void huffman_device_specific_compress(void* input, void* output);
-extern void huffman_device_specific_decompress(void* input, void* output);
-extern void lzw_device_specific_compress(void* input, void* output);
-extern void lzw_device_specific_decompress(void* input, void* output);
+///
+/// Huffman
+///
 
-void Huffman::compress(void* input, void* output)
+void Huffman::compress(std::string_view input_file_path, Memory_Block_Size gpu_block_size)
 {
-  huffman_device_specific_compress(input, output);
+  huffman_device_specific_compress();
 }
 
-void Huffman::decompress(void* input, void* output)
+void Huffman::decompress(std::string_view input_file_path)
 {
-  huffman_device_specific_decompress(input, output);
+  huffman_device_specific_decompress();
 }
 
-void Lempel_Ziv_Welch::compress(void* input, void* output)
+///
+/// Lempel-Ziv-Welch
+///
+
+void Lempel_Ziv_Welch::compress(std::string_view input_file_path, Memory_Block_Size gpu_block_size)
 {
-  lzw_device_specific_compress(input, output);
+  lzw_device_specific_compress();
 }
 
-void Lempel_Ziv_Welch::decompress(void* input, void* output)
+void Lempel_Ziv_Welch::decompress(std::string_view input_file_path)
 {
-  lzw_device_specific_decompress(input, output);
+  lzw_device_specific_decompress();
 }

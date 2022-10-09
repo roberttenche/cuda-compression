@@ -6,11 +6,18 @@
 /// Lempel-Ziv-Welch algorithm implementation
 ///
 
-__global__ void lempel_ziv_welch_compress(void* input, void* output)
+///
+/// PUBLIC FUNCTIONS
+///
+__global__ void lempel_ziv_welch_compress()
 {
   printf("Lempel-Ziv-Welch compression unimplemented!!! - threadIdx:%d\n", threadIdx.x);
 }
-__global__ void lempel_ziv_welch_decompress(void* input, void* output)
+__global__ void lempel_ziv_welch_decompress()
 {
   printf("Lempel-Ziv-Welch decompression unimplemented!!! - threadIdx:%d\n", threadIdx.x);
 }
+
+///
+/// PRIVATE FUNCTIONS
+///

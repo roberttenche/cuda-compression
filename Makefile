@@ -2,6 +2,7 @@
 device_type = base
 
 # From here on out, don't change anything
+nvcc_compiler_flags= -std c++17
 
 # Application
 appl_sources = $(huffman_output) $(lempel_ziv_welch_output) $(host_output)
@@ -42,27 +43,27 @@ default: appl
 # Application
 ifeq ($(OS),Windows_NT)
 appl: setup device_target host_target
-	nvcc -L $(appl_lib_include) -l device $(appl_sources) -o $(appl_output)
+	nvcc $(nvcc_compiler_flags) -L $(appl_lib_include) -l device $(appl_sources) -o $(appl_output)
 else
 appl: setup device_target host_target
-	nvcc -L $(appl_lib_include) -l:device.lib $(appl_sources) -o $(appl_output)
+	nvcc $(nvcc_compiler_flags) -L $(appl_lib_include) -l:device.lib $(appl_sources) -o $(appl_output)
 endif
 
 # Device
 device_target: $(device_sources) $(device_include)/device.cuh huffman_target lempel_ziv_welch_target
-	nvcc $(device_sources) -I $(device_dependencies) -o $(device_output) -lib
+	nvcc $(nvcc_compiler_flags) $(device_sources) -I $(device_dependencies) -o $(device_output) -lib
 
 # Device - Algo - Huffman
 huffman_target: $(huffman_sources) $(huffman_include)/huffman.cuh
-	nvcc -c $(huffman_sources) -I $(huffman_dependencies) -o $(huffman_output)
+	nvcc $(nvcc_compiler_flags) -c $(huffman_sources) -I $(huffman_dependencies) -o $(huffman_output)
 
 # Device - Algo - Lempel-Ziv-Welch
 lempel_ziv_welch_target: $(lempel_ziv_welch_sources) $(lempel_ziv_welch_include)/lempel_ziv_welch.cuh
-	nvcc -c $(lempel_ziv_welch_sources) -I $(lempel_ziv_welch_dependencies) -o $(lempel_ziv_welch_output)
+	nvcc $(nvcc_compiler_flags) -c $(lempel_ziv_welch_sources) -I $(lempel_ziv_welch_dependencies) -o $(lempel_ziv_welch_output)
 
 # Host
 host_target: $(host_sources)
-	nvcc -c $(host_sources) -I $(host_dependencies) -o $(host_output)
+	nvcc $(nvcc_compiler_flags) -c $(host_sources) -I $(host_dependencies) -o $(host_output)
 
 # Helper
 setup:
