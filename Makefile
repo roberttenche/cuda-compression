@@ -39,8 +39,8 @@ host_dependencies = $(device_include),$(src_include)
 
 default: appl
 
-ifeq ($(OS),Windows_NT)
 # Application
+ifeq ($(OS),Windows_NT)
 appl: setup device_target host_target
 	nvcc -L $(appl_lib_include) -l device $(appl_sources) -o $(appl_output)
 else

@@ -1,5 +1,5 @@
 from sys import argv
-from os import getcwd, mkdir, remove, rename
+from os import getcwd, mkdir, remove, rename, environ
 from platform import system
 from subprocess import run as system_run
 from genericpath import isdir, isfile
@@ -11,6 +11,11 @@ platform = system()
 
 args = argv
 args_len = len(argv)
+
+
+def set_env_vars():
+    # environ["CUDA_MODULE_LOADING"] = "LAZY" # less memory used at runtime
+    print("",end="") # avoids errors
 
 
 def info(message: str):
@@ -113,13 +118,15 @@ def make():
 
 def appl_run():
     info("Running application...")
-    if isfile("bin/appl"):
+    if isfile("bin/appl") or isfile("bin/appl.exe"):
         system_run("bin/appl")
     else:
         error("Build application first!")
 
 
 def main():
+    set_env_vars()
+
     parse_args()
 
     if arg_struct["clean"] == True or arg_struct["CLEAN"] == True:
