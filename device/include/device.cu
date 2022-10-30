@@ -40,7 +40,12 @@ Exit_Code Huffman::compress(std::string input_file_path, Memory_Block_Size gpu_b
     return exit_code = Exit_Code::FILE_NOT_ACCESSIBLE;
   }
 
+  // calculate how many blocks needed
 
+  // calculate how much overhead is added to memory
+
+  // allocate memory for blocks + overhead
+  // https://developer.nvidia.com/blog/even-easier-introduction-cuda/
 
   input_file.close();
 
