@@ -11,7 +11,7 @@ static uint16 device_cuda_cores = 512u;
 /// Huffman
 ///
 
-void huffman_device_specific_compress()
+void huffman_device_specific_compress(uint8* bytes, uint32 bytes_size, Memory_Block_Size gpu_block_size)
 {
   //
   // Insert math here
@@ -36,7 +36,7 @@ void huffman_device_specific_decompress()
 /// Lempel-Ziv-Welch
 ///
 
-void lzw_device_specific_compress()
+void lzw_device_specific_compress(uint8* bytes, uint32 bytes_size, Memory_Block_Size gpu_block_size)
 {
   //
   // Insert math here

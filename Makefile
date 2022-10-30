@@ -1,4 +1,7 @@
-# This can be changed depending on GPU used
+# device_type can be changed in order to optimize for your gpu
+# Available options:
+# base
+# gtx1660ti
 device_type = base
 
 # From here on out, don't change anything
@@ -18,7 +21,7 @@ src_include = src/include
 device_sources = device/include/device.cu device/device_specific/$(device_type)/device_specific.cu
 device_include = device/include
 device_output = build/lib/device.lib
-device_dependencies = $(device_include),$(src_include),$(huffman_include),$(lempel_ziv_welch_include)
+device_dependencies = $(src_include),$(device_include),$(huffman_include),$(lempel_ziv_welch_include)
 
 # Device - Huffman
 huffman_sources = device/algo/huffman/huffman.cu
@@ -36,7 +39,7 @@ lempel_ziv_welch_dependencies = $(src_include)
 host_sources = host/host.cu
 host_include = 
 host_output = build/host/host.obj
-host_dependencies = $(device_include),$(src_include)
+host_dependencies = $(src_include),$(device_include)
 
 default: appl
 
