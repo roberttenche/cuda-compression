@@ -1,0 +1,3 @@
+[submodule "tests/cuda-compression-test-files"]
+	path = tests/cuda-compression-test-files
+	url = git@github.com:roberttenche/cuda-compression-test-files.git
