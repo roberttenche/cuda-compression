@@ -1,0 +1,29 @@
+@startuml software_modules
+
+scale 1.5
+title Software modules
+
+[host]
+note top
+User program
+end note
+
+[host] --> [device]
+note top
+Serves as an interface to the user
+end note
+
+
+[device] --> [device_specific]
+note top
+Layer where math is done
+to optimize diffrent GPU's
+end note
+
+[device_specific] --> [aglo]
+note top
+Huffman algorithm that 
+is ran on the GPU
+end note
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml activity_workflow
+
+scale 1.5
+title Activity workflow
+
+(*) ---> [Compress | Decompress] if "File too small to compress?" then
+    ---> [true] "Return Exit_Code::FILE_TOO_SMALL"
+    ---> (*)
+    else
+    ---> [false] if "File is accessible?" then
+    ---> [false] "Return Exit_Code::FILE_NOT_ACCESSIBLE"
+    ---> (*)
+    else
+    ---> [true] "**[Compress|Decompress]** data"
+    note right
+      Runtime exceptions may arise
+      Refer to runtime exception doc
+    end note
+    ---> "Return Exit_Code::ALL_GOOD"
+    ---> (*)
+
+@enduml

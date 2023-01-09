@@ -1,0 +1,10 @@
+@startuml use_case
+
+scale 1.5
+title Use cases
+
+"**[Compress|Decompress]** data" as (use_case)
+
+:User: -> (use_case) : is able to
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml system_diagram
+
+scale 1.5
+title Software abstraction layers
+
+participant main as host
+note over host
+  User interacts only
+  with GPU_Interface
+end note
+
+participant GPU_Interface as device_interface
+/ note over device_interface
+  Software interface to interact
+  with the GPU
+end note
+
+participant Device_Specific_Interface as hardware_interface
+/ note over hardware_interface
+  Software abstraction layer
+  for hardware
+end note
+
+participant GPU_Hardware as device
+
+host -> device_interface : Huffman::**[compress|decompress]**
+
+device_interface -> hardware_interface : huffman_device_specific_**[compress|decompress]**
+
+hardware_interface -> device : huffman_**[compress|decompress]**
+
+@enduml
